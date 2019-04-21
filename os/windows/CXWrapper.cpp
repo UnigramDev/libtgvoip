@@ -17,7 +17,9 @@ using namespace Windows::Security::Cryptography;
 using namespace Windows::Security::Cryptography::Core;
 using namespace Windows::Storage::Streams;
 using namespace Windows::Data::Json;
+#ifndef WEBRTC_UWP
 using namespace Windows::Phone::Media::Devices;
+#endif
 
 //CryptographicHash^ MicrosoftCryptoImpl::sha1Hash;
 //CryptographicHash^ MicrosoftCryptoImpl::sha256Hash;
@@ -233,6 +235,7 @@ void VoIPControllerWrapper::UpdateServerConfig(Platform::String^ json){
 	ServerConfig::GetSharedInstance()->Update(config);
 }
 
+#ifndef WEBRTC_UWP
 void VoIPControllerWrapper::SwitchSpeaker(bool external){
 	auto routingManager = AudioRoutingManager::GetDefault();
 	if (external){
@@ -247,6 +250,7 @@ void VoIPControllerWrapper::SwitchSpeaker(bool external){
 		}
 	}
 }
+#endif
 
 void MicrosoftCryptoImpl::AesIgeEncrypt(uint8_t* in, uint8_t* out, size_t len, uint8_t* key, uint8_t* iv){
 	IBuffer^ keybuf=IBufferFromPtr(key, 32);

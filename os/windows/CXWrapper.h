@@ -185,8 +185,10 @@ namespace libtgvoip{
 
 		static int32_t GetConnectionMaxLayer();
 		static void UpdateServerConfig(Platform::String^ json);
+
+#ifndef WEBRTC_UWP
 		static void SwitchSpeaker(bool external);
-		//static Platform::String^ TestAesIge();
+#endif
 
 		event CallStateChangedEventHandler^ CallStateChanged;
 		event SignalBarsChangedEventHandler^ SignalBarsChanged;
